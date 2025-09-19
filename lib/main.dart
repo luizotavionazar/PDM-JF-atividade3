@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:primeiro_flutter/segunda_tela.dart';
 
 void main() {
   runApp(const MyApp());
@@ -55,19 +56,26 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-  String nome = 'You';
+  String _nome = 'You';
 
   final TextEditingController _controller = TextEditingController();
 
   void _trocar_nome() {
     setState(() {
-      nome= _controller.text;
-      if (nome.isEmpty) {
-        nome= 'You';
+      _nome= _controller.text;
+      if (_nome.isEmpty) {
+        _nome= 'You';
       }
       _controller.clear();
       _counter= 0;
     });
+  }
+
+  void secondScreen() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SegundaTela(contador: _counter, name: _nome,))
+    );
   }
 
   void _incrementCounter() {
@@ -119,7 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-                '$nome have pushed the button this many times:',
+                '$_nome have pushed the button this many times:',
                 style: Theme.of(context).textTheme.headlineSmall
             ),
             Text(
@@ -135,7 +143,10 @@ class _MyHomePageState extends State<MyHomePage> {
                      child: TextField(controller: _controller,),),
             SizedBox(height: 20,),
             ElevatedButton(onPressed: _trocar_nome,
-                     child: Text("CONFIRM", style: Theme.of(context).textTheme.headlineSmall,))
+                     child: Text("CONFIRM", style: Theme.of(context).textTheme.headlineSmall,)),
+            SizedBox(height: 20,),
+            ElevatedButton(onPressed: secondScreen,
+                child: Text("SECOND SCREEN", style: Theme.of(context).textTheme.headlineSmall,)),
           ],
         ),
       ),
