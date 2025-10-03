@@ -3,26 +3,16 @@ import 'package:flutter/material.dart';
 class SegundaTela extends StatefulWidget {
   int contador;
   String name;
-  SegundaTela({super.key,this.contador=0,this.name=''});
+  SegundaTela({super.key,this.contador=0, required this.name});
 
   @override
   State<SegundaTela> createState() => _SegundaTelaState();
 }
 
 class _SegundaTelaState extends State<SegundaTela> {
-  late int _count;
-  late String _name;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _count=widget.contador;
-    _name=widget.name;
-  }
 
   void voltar() {
-    Navigator.pop(context);
+    Navigator.pop(context, widget.contador+1);
   }
 
   @override
@@ -36,7 +26,7 @@ class _SegundaTelaState extends State<SegundaTela> {
           children: [
             SizedBox(height: 20,),
             Text(
-                "$_name have pushed the button this many times: $_count",
+                "${widget.name} have pushed the button this many times: ${widget.contador}",
                 style: Theme.of(context).textTheme.headlineMedium),
             SizedBox(height: 20,),
             ElevatedButton(
